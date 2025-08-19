@@ -1,0 +1,5 @@
+mongodump -d ppspindb --gzip -o e:\dump
+mongodump -d pgspindb --gzip -o e:\dump
+mongodump -d amspindb --gzip -o e:\dump
+mongodump -d amspindb --collection=infos --gzip -o e:\dump
+mongorestore --gzip --db amspindb --verbose .\dump\amspindb

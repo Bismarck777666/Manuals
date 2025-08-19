@@ -1,0 +1,8 @@
+Navicat레지스터 해결책
+우선 안인스톨해치운다
+다음 레지스트리를 켜고 
+HKEY_CURRENT_USER/Software/premiumsoft 디렉토리를 찾아보고 있으면 지워버린다.
+다음 다시 인스톨한다.
+그다음 체계의 날자시간을 activate시간 이전시간으로 맞추어 놓고 아래의 키를 입력한다.
+NAVI GGZ2 QRKB DXGD
+체크표식이 보이면 activate버튼을 클릭하면 성공적으로 액티베이트 된다.

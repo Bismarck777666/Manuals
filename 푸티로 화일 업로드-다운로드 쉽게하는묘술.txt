@@ -1,0 +1,3 @@
+putty에 화일 업로드 다운로드
+pscp ubuntu@15.164.171.134:/home/source/web.zip web.zip
+pscp web.zip ubuntu@15.164.171.134:/home/source/web.zip

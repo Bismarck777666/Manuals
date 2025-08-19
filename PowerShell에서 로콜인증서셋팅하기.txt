@@ -1,0 +1,15 @@
+C:\Windows\System32\drivers\etc\.hosts파일아래에 
+127.0.0.1 m.pgtest.com
+127.0.0.1 api.pgtest.com
+127.0.0.1 static.pgtest.com
+도메인추가
+
+파워셀에서 인증파일생성
+New-SelfSignedCertificate -CertStoreLocation Cert:\LocalMachine\My -DnsName "static.jili.com" -FriendlyName "static.jili.com" -NotAfter (Get-Date).AddYears(10)
+
+certlm.msc (인증서 서비스에서)
+Personal 폴더에 있는 도메인별 인증서 파일을
+Trusted Root Certification 폴더에 복사
+
+IIS에 해당도메인으로 웹사이트 셋팅하면 된다.
+

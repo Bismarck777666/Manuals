@@ -1,0 +1,22 @@
+SELECT r.agentid,sum(r.bet) AS betmoney,sum(r.win) AS winmoney,a.rollfee,a.rosingfee,FORMAT(reporttime,'yyyy-MM-dd') AS rdate FROM agentreports r INNER JOIN agents a ON a.id = r.agentid
+WHERE (r.reporttime < '2021-07-15 13:00:00.000' AND r.reporttime > '2021-07-1 13:00:00.000') 
+	AND agentid IN(SELECT id FROM agents WHERE(id IN (SELECT id FROM agents WHERE (id = '4' OR parentid = '4')) OR parentid IN (SELECT id FROM agents WHERE (id = '4' OR parentid = '4'))))
+GROUP BY agentid,rollfee,rosingfee,FORMAT(reporttime,'yyyy-MM-dd') ORDER BY rdate
+
+
+
+
+
+SELECT * FROM (";
+                strQuery += "SELECT tbldate.alldate," +
+                        "(SELECT betmoney FROM(SELECT sum(r.bet) AS betmoney, FORMAT(reporttime, 'yyyyMMdd') oneday FROM agentreports r INNER JOIN agents a ON a.id = r.agentid " +
+                        "WHERE(r.reporttime > @p0 AND r.reporttime < @p1) " +
+                        "AND r.agentid IN(SELECT id FROM agents WHERE(id IN(SELECT id FROM agents WHERE(id = @p2 OR parentid = @p2)) OR parentid IN(SELECT id FROM agents WHERE(id = @p2 OR parentid = @p2)))) " +
+                        "GROUP BY FORMAT(reporttime, 'yyyyMMdd')) tblhistory WHERE tbldate.alldate = oneday) AS betmoney ," +
+                        "(SELECT winmoney FROM(SELECT sum(r.win) AS winmoney, FORMAT(reporttime, 'yyyyMMdd') oneday FROM agentreports r INNER JOIN agents a ON a.id = r.agentid " +
+                        "WHERE(r.reporttime > @p0 AND r.reporttime < @p1) " +
+                        "AND r.agentid IN(SELECT id FROM agents WHERE(id IN(SELECT id FROM agents WHERE(id = @p2 OR parentid = @p2)) OR parentid IN(SELECT id FROM agents WHERE(id = @p2 OR parentid = @p2)))) " +
+                        "GROUP BY FORMAT(reporttime, 'yyyyMMdd')) tblhistory WHERE tbldate.alldate = oneday) AS winmoney ," +
+                        "ROW_NUMBER() OVER(ORDER BY tbldate.alldate) AS rowNum " +
+                        "FROM(SELECT CONVERT(VARCHAR, DATEADD(D, NUMBER, @p0), 112) AS alldate FROM MASTER..SPT_VALUES WHERE TYPE = 'P' AND NUMBER <= DATEDIFF(D, @p0, @p1)) tbldate";
+                strQuery += ") sub WHERE rowNum BETWEEN @p3 AND @p4

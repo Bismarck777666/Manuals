@@ -1,0 +1,8 @@
+MDB를 ASP.NET에 적용하기
+1.MDBJquery 를 공식페이지 https://mdbootstrap.com/docs/jquery/getting-started/download/ 에서 다운한다.
+2.ASP.NET MVC프로젝트를 생성한다.
+3.Nuget PackageManager에서 Bootstrap 버젼을 MDB에 맞게 업데이트한다.
+4.Content폴더에 mdb.min.css화일을 추가한다.
+5.Scripts폴더에는 mdb.min.js화일을 추가한다.
+6.App_start/bundleConfig.cs화일을 찾아 Script 번들과 Style번들에 mdb경로를 포함해준다.
+7.마지막으로 Site.Css화일을 편집하여 본문패딩을 주석처리한다.

@@ -1,0 +1,13 @@
+SELECT p.bet, p.cash_out, p.created, p.game_id, CASE p.bet_options 
+WHEN '0' THEN '홀' WHEN '1' THEN '짝' WHEN '2' THEN '대' WHEN '3' THEN '소' ELSE '그래프' END AS bet_option,g.game_crash,p.bonus
+FROM plays p LEFT JOIN (SELECT * FROM games) g ON g.id = p.game_id 
+WHERE p.user_id = 3 AND g.ended = true
+UNION ALL
+SELECT p.bet, p.cash_out, p.created, p.game_id, CASE p.bet_category 
+WHEN '0' THEN '파워볼 홀' WHEN '1' THEN '파워볼 짝' WHEN '2' THEN '파워볼 언더' WHEN '3' THEN '파워볼 오버' 
+WHEN '4' THEN '일반볼 홀' WHEN '5' THEN '일반볼 짝' WHEN '6' THEN '일반볼 언더' WHEN '7' THEN '일반볼 오버' 
+WHEN '8' THEN '일반볼 소' WHEN '9' THEN '일반볼 중' 
+ELSE '일반볼 대' END AS bet_option, 0 AS game_crash, 0 AS bonus
+FROM powerball_plays p LEFT JOIN (SELECT * FROM powerball_games) g ON g.id = p.game_id 
+WHERE p.user_id = 3 AND g.status = 'F'
+ORDER BY created DESC LIMIT 40 OFFSET 0

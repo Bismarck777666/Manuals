@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS temp_plays;
+
+CREATE TEMP TABLE temp_plays
+(
+    id bigint,
+    user_id bigint,
+    cash_out bigint,
+    auto_cash_out bigint,
+    game_id bigint,
+    created timestamp(6),
+    bet bigint,
+    bonus bigint,
+    bet_options character(10),
+    result_status boolean,
+    payed_status boolean,
+    bet_category bigint,
+    bet_type text
+);
+
+INSERT INTO temp_plays SELECT * FROM plays WHERE user_id=3;
+
+INSERT INTO temp_plays(user_id,cash_out,game_id,created,bet,result_status,payed_status,bet_category,bet_type) 
+SELECT user_id,cash_out,game_id,created,bet,result_status,payed_status,bet_category,bet_type 
+FROM powerball_plays WHERE user_id=3;
+
+SELECT * FROM temp_plays WHERE user_id = 3 ORDER BY created DESC;

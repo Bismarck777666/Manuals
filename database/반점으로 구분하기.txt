@@ -1,0 +1,4 @@
+SELECT sum(r.bet) AS betmoney,sum(r.win) AS winmoney,FORMAT(reporttime,'yyyy-MM-dd') AS rdate 
+FROM agentreports r INNER JOIN agents a ON a.id = r.agentid 
+WHERE(r.reporttime >= '2021-07-14 00:00:00.000' AND r.reporttime <= '2021-07-15 00:00:00.000') AND(a.agentids LIKE '%,4,%' OR a.agentids LIKE '%,4' OR a.id = 4) 
+GROUP BY FORMAT(reporttime, 'yyyy-MM-dd') ORDER BY rdate

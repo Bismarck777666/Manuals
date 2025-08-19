@@ -1,0 +1,5 @@
+-postgres 지령으로 리스토
+pg_restore -U postgres -d satoshimines1 -1 "E:\data\complete\customers_work\Else\BustabitNew\db.sql"
+putty에 화일 업로드 다운로드
+pscp ubuntu@15.164.171.134:/home/source/web.zip web.zip
+pscp web.zip ubuntu@15.164.171.134:/home/source/web.zip
